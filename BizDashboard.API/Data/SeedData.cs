@@ -19,11 +19,12 @@ namespace BizDashboard.API.Data
             if (!this.ctx.Customers.Any())
             {
                 SeedCustomers(nCustomers);
+                this.ctx.SaveChanges();
             }
 
             if (!this.ctx.Orders.Any())
             {
-                SeedOrders(nCustomers);
+                SeedOrders(nOrders);
             }
 
             if (!this.ctx.Servers.Any())
@@ -59,12 +60,12 @@ namespace BizDashboard.API.Data
             var orders = new List<Order>();
             var rand = new Random();
 
-            for (int i = 0; i < n; i++)
+            for (int i = 1; i <= n; i++)
             {
                 var placed = Helpers.GetRandomOrderPlaced();
                 var completed = Helpers.GetRandomOrderCompleted(placed);
 
-                var randCustomerId = rand.Next(this.ctx.Customers.Count());
+                var randCustomerId = rand.Next(1, this.ctx.Customers.Count());
 
                 orders.Add(new Order
                 {
@@ -126,7 +127,7 @@ namespace BizDashboard.API.Data
                 new Server
                 {
                     Id = 6,
-                    Name = "Qa-Services",
+                    Name = "QA-Services",
                     IsOnline = false
                 },
                 new Server
@@ -155,7 +156,7 @@ namespace BizDashboard.API.Data
             var customers = new List<Customer>();
             var names = new List<string>();
 
-            for (int i = 0; i < nCustomers; i++)
+            for (int i = 1; i <= nCustomers; i++)
             {
                 var name = Helpers.MakeUniqueCustomerName(names);
                 names.Add(name);
