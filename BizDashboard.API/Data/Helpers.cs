@@ -74,7 +74,7 @@ namespace BizDashboard.API.Data
 
         internal static decimal GetRandomOrderTotal()
         {
-            return _rand.Next(100, 500);
+            return (decimal)_rand.Next(100, 500);
         }
 
         internal static Customer GetRandomCustomer()
